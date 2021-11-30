@@ -42,8 +42,8 @@ public class MaximumPathSum2 {
 
         SubPathSum left = dfs(root.left);
         SubPathSum right = dfs(root.right);
-        left = left == null? new SubPathSum(0, false, new ArrayList<>()) : left;
-        right = right == null? new SubPathSum(0, false, new ArrayList<>()) : right;
+        left = left == null? new SubPathSum(0, false) : left;
+        right = right == null? new SubPathSum(0, false) : right;
 
         if(root.isAsterisk) {
 
@@ -53,6 +53,7 @@ public class MaximumPathSum2 {
                 maxPath = Math.max(root.val + (left.isStartWithAsterisk ? left.sum : right.sum), maxPath);
             }
             return new SubPathSum(root.val, true);  // 剪枝
+
         }else{ // !root.isAsterisk
 
             if(left.isStartWithAsterisk && right.isStartWithAsterisk){
@@ -60,9 +61,9 @@ public class MaximumPathSum2 {
                 return new SubPathSum(root.val + Math.max(left.sum, right.sum), true);
             } else if (left.isStartWithAsterisk || right.isStartWithAsterisk) {
                 return new SubPathSum(root.val + (left.isStartWithAsterisk ? left.sum: right.sum), true); // 记住是自底向上看问题,当递归回到中间的节点which problem can be solved base on 已解决的下层节点
-            }else{ // if no asterisk
-                return new SubPathSum(root.val + Math.max(left.sum, right.sum), false);
-            }
+            }/*else{ // if no asterisk, just cut it, we don't need care it at all }*/
+
+            return null;
         }
     }
 }

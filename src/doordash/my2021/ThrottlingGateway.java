@@ -19,10 +19,10 @@ public class ThrottlingGateway {
             if(i > 2 && requestTime[i] - requestTime[i-3] < 1) { // first throttle condition
                 ans++;
                 System.out.println("throttle 1 drop: " + requestTime[i]);
-            }else if (i > 19 && requestTime[i] - requestTime[i-20] < 10) { // second throttle condition
+            }else if (i > 19 && requestTime[i] - requestTime[i-20] < 10) { // second throttle condition - 10 sec can't exceed 20 transactions
                 ans++;
                 System.out.println("throttle 2 drop: " +  requestTime[i] );
-            }else if (i > 59 && requestTime[i] - requestTime[i-59] < 60) { // third throttle condition
+            }else if (i > 59 && requestTime[i] - requestTime[i-60] < 60) { // third throttle condition
                 ans++;
                 System.out.println("throttle 3 drop: " +  requestTime[i] );
             }
