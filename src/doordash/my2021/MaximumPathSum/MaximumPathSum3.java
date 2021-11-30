@@ -47,8 +47,6 @@ public class MaximumPathSum3 {
 
         if(root.isAsterisk) {
 
-            //hidden case - leaf node which return directly SubPathSum(root.val, true, new ArrayList(Arrays.asList(root.val)))
-
             if(left.isStartWithAsterisk && right.isStartWithAsterisk) {
                 if(root.val + Math.max(left.sum, right.sum) > maxPathSum) {
                     maxPathSum = root.val + Math.max(left.sum, right.sum);
@@ -65,7 +63,7 @@ public class MaximumPathSum3 {
                 }
             }
 
-            return new SubPathSum(root.val, true, new ArrayList(Arrays.asList(root.val)));  // 剪枝
+            return new SubPathSum(root.val, true, new ArrayList(Arrays.asList(root.val)));  // 剪枝 or leaf node
 
         }else{ // !root.isAsterisk
 

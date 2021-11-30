@@ -52,7 +52,7 @@ public class MaximumPathSum2 {
             }else if (left.isStartWithAsterisk || right.isStartWithAsterisk){
                 maxPath = Math.max(root.val + (left.isStartWithAsterisk ? left.sum : right.sum), maxPath);
             }
-            return new SubPathSum(root.val, true);  // 剪枝
+            return new SubPathSum(root.val, true);  // 剪枝 or leaf node
 
         }else{ // !root.isAsterisk
 
@@ -61,9 +61,9 @@ public class MaximumPathSum2 {
                 return new SubPathSum(root.val + Math.max(left.sum, right.sum), true);
             } else if (left.isStartWithAsterisk || right.isStartWithAsterisk) {
                 return new SubPathSum(root.val + (left.isStartWithAsterisk ? left.sum: right.sum), true); // 记住是自底向上看问题,当递归回到中间的节点which problem can be solved base on 已解决的下层节点
-            }/*else{ // if no asterisk, just cut it, we don't need care it at all }*/
-
-            return null;
+            } else{ // if no asterisk, just Cut it, don't need care it at all
+                return null;
+            }
         }
     }
 }
