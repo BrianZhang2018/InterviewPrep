@@ -1,0 +1,6 @@
+
+PriorityQueue + Timer
+1. 每来一个task，define start_time = cur_time + delay
+2. 设置一个Heap<task>, 以task.start_time排序，最小的放在top
+3. 把当前task加入Heap，set timer = (Heap.top.start_time - cur_time)
+4. 当timer到时间激发时，run task = Heap.top; Heap.remove_top; set timer = (Heap.top.start_time - cur_time)

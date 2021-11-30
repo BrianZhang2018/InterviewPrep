@@ -1,0 +1,5 @@
+https://www.1point3acres.com/bbs/thread-665762-1-1.html
+
+
+怎么实现history vote per user,我说在DynamoDB 里面user_id 做 partition key, vote_time做sort key，这样可以range scan
+https://stackoverflow.com/questions/27329461/what-is-hash-and-range-primary-key

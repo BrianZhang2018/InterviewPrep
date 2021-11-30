@@ -1,0 +1,14 @@
+Java Platform is a collection of programs that help programmers to develop and run Java programming applications efficiently.
+It includes an execution engine, a compiler, and a set of libraries in it. It is a set of computer software and specifications.
+
+Encapsulation, inheritance, polymorphism,  (Abstraction)
+
+S.O.L.I.D: The First 5 Principles of OOD
+S — Single responsibility principle.
+O — Open-closed principle.
+L — Liskov substitution principle.
+I — Interface segregation principle.
+D — Dependency Inversion Principle.
+
+What does OOD mean to you
+clear responsibility, reusable, easily extend

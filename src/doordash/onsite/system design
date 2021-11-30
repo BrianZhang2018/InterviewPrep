@@ -1,0 +1,37 @@
+Design a Donation App:
+https://leetcode.com/discuss/interview-question/318214/DoorDash-Onsite-System-Design-question
+
+https://www.1point3acres.com/bbs/thread-464475-1-1.html
+design: 设计募捐系统, 主要讨论schema的设计, 怎么和第三方 payment service 通信等问题
+
+===============================
+
+5轮
+第1轮coding还不是很传统的算法面试。
+题目是给了一堆已经成型的code，内容是connect4这么个游戏。
+然后让你增加新的feature。做完一个就提一个新的feature加上去。
+我做了3个
+第一个是 把input改成只需要输入列数（因为connect4的棋子是会掉下去的嘛，所以行数可以求出来）
+第二个是 把 checkwinner完成了-baidu 1point3acres
+第三个是 增加一个可以跟AI对战的feature，AI随便弄，我就直接弄了个最蠢的随机下子的AI。然后没时间了
+
+第2轮coding是算法
+dependency graph然后print出来假如要compile A，所有其他文件要compile的顺序。
+可以用拓扑，或者直接用DFS我觉得也行
+
+系统设计是设计一个donation系统。
+比如要搞个3天的charity活动，user可以进行donation。如何实现charge 钱， email 收据，最后summary 这几个功能。
+
+
+--Design slack
+
+系统设计：设计slack message系统。API， 如何reconnect，如何scale
+
+dive deep 项目，design slack，怎么group chat，client端的push or pull model - webSocket rather than the long polling
+
+--Design donation system
+
+design: 设计募捐系统, 主要讨论schema的设计, 怎么和第三方 payment service 通信等问题
+
+design. 设计一个捐款网站，然后统计top10显示，payment api给你。事后感觉他们会assume你对payment api比较了解，另外top10的生成算是heavy hitter problem？
+答题的时候时间紧张就也没想太多，事后感觉是，但面试的时候follow up主要都是集中在怎么call api怎么防止用户double click上面，不是很确定

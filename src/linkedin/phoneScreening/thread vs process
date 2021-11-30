@@ -1,0 +1,37 @@
+https://stackoverflow.com/questions/1762418/what-resources-are-shared-between-threads
+
+A process has code, data, heap and stack segments. Now, the Instruction Pointer (IP) of a thread OR threads points to the code
+segment of the process. The data and heap segments are shared by all the threads. Now what about the stack area? What is actually
+the stack area? Its an area created by the process just for its thread to use... because stacks can be used in a much faster way
+than heaps etc. The stack area of the process is divided among threads, i.e. if there are 3 threads, then the stack area of the
+process is divided into 3 parts and each is given to the 3 threads. In other words, when we say that each thread has its own stack
+, that stack is actually a part of the process stack area allocated to each thread. When a thread finishes its execution,
+the stack of the thread is reclaimed by the process. In fact, not only the stack of a process is divided among threads,
+but all the set of registers that a thread uses like SP, PC and state registers are the registers of the process.
+So when it comes to sharing, the code, data and heap areas are shared, while the stack area is just divided among threads.
+
+
+When a thread invokes a Java method, the virtual machine creates and pushes a new frame onto the thread's Java stack.
+This new frame then becomes the current frame. As the method executes, it uses the frame to store parameters,
+local variables, intermediate computations, and other data.
+
+
+
+https://www.cs.uleth.ca/~holzmann/C/system/process_segments.html#:~:text=Process%20Segments&text=A%20process%20(executing%20program)%20has,process%20only%20via%20system%20calls.
+
+Process Segments
+A process (executing program) has text, data and system data segments. A process's address space consists of the text
+and data segments. The system data segment is part of the process but is maintained by the system and is accessible by the process only via system calls.
+
+Text/Instruction Segment
+The text segment consists of program code. It is read-only and is initialized from the program executable file.
+
+User Data Segment
+Initialized data: strings initialized from the program executable.
+Uninitialized data: global variables. These are set to 0 bits.
+Malloc arena or heap: created by the process.
+Stack: auto variables and function parameters, including argc, argv[ ], and env[ ]. It is created by the startup routine (crt*.o) and grows/shrinks with function calls/r
+
+
+What is the difference between a thread/process/task?
+https://stackoverflow.com/questions/3042717/what-is-the-difference-between-a-thread-process-task

@@ -1,0 +1,7 @@
+freq: 2
+
+第二轮 是两个白人manager，不是email上写的那一个人，互相聊彼此的经历聊了有20分钟。之后问了小蓝鸟发推怎么给follower发通知的问题。主要是focus在名人的问题上，
+普通量级follower就简单提了一下。不得不说hackerrank白板真的不是很好用，打字换行太费劲。我简单说了下思路，然后给了db的schema，user和user relation两个table，
+这样user relation比较好query拿到所有follower。聊了sharding。以及我想的是每个tweet应该有message queue来让worker async地把消息发给follower.
+可以用一个healthcheck来monitor message queue的状态，如果down了就可以有secondary take over.说实话系统设计真的没准备过多久，我能答成这样我也不后悔了。
+然后问了manager的培养模式，觉得氛围还是很好的，可以参加training啥的。

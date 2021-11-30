@@ -1,0 +1,5 @@
+/bin/
+*.class
+*/workspace.xml
+out/product*
+.idea/workspace.xml

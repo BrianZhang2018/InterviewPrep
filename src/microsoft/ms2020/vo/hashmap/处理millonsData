@@ -1,0 +1,7 @@
+https://stackoverflow.com/questions/1757363/java-hashmap-performance-optimization-alternative
+
+1. Run Java with more memory: java -Xmx256M for example to run with 256 Megabytes. Use more if needed and you have lots of RAM.
+
+2. Cache your calculated hash values as suggested by another poster, so each object only calculates its hash value once.
+
+3. Use a better hashing algorithm. The one you posted would return the same hash where a = {0, 1} as it would where a ={1, 0}, all else being equal.

@@ -1,0 +1,3 @@
+先引导我做了一个List的collection wrapper，然后引出其实他tm想要的是insertDeleteGet O(1) 的问题，不过list要是sorted的，擦，把我给弄晕了
+
+这个题应该和interviewer要hint，因为可能这逼也没弄明白

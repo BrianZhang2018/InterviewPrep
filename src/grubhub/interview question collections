@@ -1,0 +1,38 @@
+Interview Questions
+
+1. Algorithm: Opening and closing bracket validation
+2. OOP: Design Spreadsheet.
+3. System: Design Youtube
+
+================================
+
+Take a string of repeated letters and output a shortened form. E.g. input: ddddcbb ouputs 4dc2b. Then write a function to reverse that process.
+
+Given a 2D matrix (e.g. 3x3) output the numbers in spiral format.
+
+Create a version of SetInterval with SetTimeout
+
+Given a webpage, how would you organize this page in React?
+
+================================
+
+Second interview was coding. We did 2 questions and had a lot of time to spare. binary tree traversal & composition, Linked list, nodes, and hash map.
+
+================================
+
+2) Onsite interview with 3 Tech Leads and Director.
+    a) Design a book library
+    b) Write a linkedlist in Java
+    c) Architectural problem related to dispatch delivery.
+
+
+================================
+
+Implements a thread safe linked list.
+    -single LinkedList :https://www.geeksforgeeks.org/implementing-a-linked-list-in-java-using-class/
+    -
+Implement a hashMap
+
+=================================
+
+

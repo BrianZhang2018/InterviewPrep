@@ -1,0 +1,87 @@
+https://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid=643718&ctid=230578
+
+一个在公司搞网路的马内急，一个刚入职一年多一点，估计是shadow？这轮是设计，问的是酒店房间预定，之前recruiter还说了设计会问这个，但是这个也太宽了，
+不知道到底要设计什么样的，就网上看了看，另外看看booking。com如何。我上来刚开始从high level说整个系统的体系结构的时候，网路马内急说先不用考虑辣么多，
+就是一个酒店，有多个房间的情形。那我就设计了几个model，像Hotel，Floor，Room等，然后又说系统应该提供查询和预定两个最基本的功能，
+我就设计这两个接口，查询可以按照日期和人数等。这里答的可能不太好，我说返回所有available的房间，马内急说应该按房间类型返回，每种房间有几个available的。
+我说是，这样的话我就在对所有的房间按类型merge一下再返回。接下说预定，接着问如何处理conflict，这里也说了一小会，我说可以用数据库的锁，一个请求来了锁住，
+等处理好了这个book请求，再处理下一个，处理下一个之前要再看看是不是该请求还能满足。这个方法被说不是很好，效率比较低，（我感觉也是），
+又问如何改进，我说用event queue把所有请求入队，然后拉出来按个放血，这样就不需要所了。后来感觉也不太好。。。。说着说着就到时间了，
+后来就叫我问问题，唉感觉这轮不好，后来也印证了。。
+
+
+1. 表设计
+
+2. available room search
+
+3. handle booking conflict
+
+
+关于设计题，一个production 环境里面的共享重要资源，需要尽量减少锁的要求，如果必须锁，那么就越短越好。解决的方法一般有几种：
+
+第一，partition，这样你只需要锁其中的一个，不影响其他。partition越多，可以同时access的process越多。当然partition多了会带来管理的麻烦。 mysql partition: https://www.vertabelo.com/blog/everything-you-need-to-know-about-mysql-partitions/#:~:text=MySQL%20partitioning%20is%20about%20altering,the%20%E2%80%9Cpartitioning%20function%E2%80%9D).
+第二，optimistic lock。比如说你一秒前返回这个房间是available的，那么你可以假设他是available的进行处理，只有在最后需要commit那一步才真正锁住table，update状态。如果这一步发现已经被其他用户抢先订了，就返回一个error message说没有房间了（其实这种情况并不少见）。
+第三，允许用户在没有锁的情况下hold一定时间。比如用户选了一个房间，还在磨磨蹭蹭付款，你可以把这个房间设成reserved状态，其他人就不能选了。但是这个状态5分钟之后，如果用户没有完成付款，就会被重新update成available，可以被其他人选。
+第四，读写分离，这个其实跟第二点类似。所有读的请求都送到slave 数据库，只有需要写的那一次才update master，如果发现slave和数据已经有延迟，master已经不available了，就返回错误信息。
+第五，这是数据库specific的，尽量用row lock而不是table lock。如果你是update 某个特定的row，可以允许其他process update同一个table的其他row，也可以减少blocking。
+最后，这个跟数据库关系不大，就是尽量用immutable的资源，这样就不需要lock了。
+
+
+Post /search:
+request: {
+            city,
+            postalCode,
+            countryCode,
+            checkInDate,
+            checkOutDate,
+            numOfPeople,
+            numOfRooms
+        }
+
+response:{  按房间类型返回
+
+          "Queen":{
+                    roomId,
+                    price,
+                    numOfAvailableRoom: n,
+                  },
+          "King": {
+                    roomId,
+                    price,
+                    numOfAvailableRoom: n,
+                  }
+         }
+
+Post /book:
+
+request:{
+    guestId,
+    checkInDate,
+    checkOutDate,
+    made_by,
+    rooms:[
+            {type: "queen", numOfRooms: 2, price: 100},
+            {type: "king", numOfRooms: 2m price: 90},
+          ]
+}
+
+response:{
+    confirmation_number,
+    status,  // success, failed
+}
+
+
+Transaction VS table lock
+
+Transaction concepts and locks are different. However, transaction used locks (specify the isolation level in transaction) to help it to follow the ACID principles.
+If you want to the table to prevent others to read/write at the same time point while you are read/write, you need a lock to do this.
+If you want to make sure the data integrity and consistence, you had better use transactions. I think mixed concepts of isolation levels in transactions with locks.
+Please search isolation levels of transactions, SERIALIZE should be the level you want.
+
+Locking is for preventing race conditions, and transactions is for updating multiple tables with dependent data.
+
+isolation levels:
+https://docs.microsoft.com/en-us/sql/connect/jdbc/understanding-isolation-levels?view=sql-server-ver15#:~:text=Transactions%20specify%20an%20isolation%20level,or%20phantom%20reads%2C%20are%20allowed.
+
+PostgreSQL Transaction Isolation Levels with Go Examples:
+https://hackernoon.com/postgresql-transaction-isolation-levels-with-go-examples-lt5g3yh5
