@@ -13,6 +13,8 @@ import model.TreeNode;
  # *100 *50  *100  *15
  # ans = 287 = 100 + 2 + 5 + 80 + 100
 
+ * bottom-up recursion
+ *
  * Created by brianzhang on 11/21/21.
  */
 public class MaximumPathSum1 {

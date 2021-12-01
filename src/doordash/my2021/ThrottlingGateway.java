@@ -9,6 +9,8 @@ public class ThrottlingGateway {
     public static void main(String[] args) {
         System.out.println(getNumOfDroppedRequest(new int[] {1,1,1,1,2,2,2,3,3,3,4,4,4,5,5,5,6,6,6,7,7,7,7,11,11,11,11}));
         System.out.println(getNumOfDroppedRequest1(new int[] {1,1,1,1,2,2,2,3,3,3,4,4,4,5,5,5,6,6,6,7,7,7,7,11,11,11,11}).size());
+
+        Double s = Math.ceil(1.25);
     }
 
     public static int getNumOfDroppedRequest(int[] requestTime) {
