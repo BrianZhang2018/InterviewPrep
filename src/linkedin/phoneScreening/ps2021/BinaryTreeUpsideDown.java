@@ -19,18 +19,18 @@ public class BinaryTreeUpsideDown {
         upsideDownBinaryTreeIterative(root);
     }
 
+    // solution-1 recursive
     public static TreeNode upsideDownBinaryTree(TreeNode root) {
         if(root == null || root.left == null) return root;
 
-        TreeNode newRoot =  upsideDownBinaryTree(root.left);
+        TreeNode newRoot = upsideDownBinaryTree(root.left);
         root.left.left = root.right;
         root.left.right = root;
         root.left = null;
         root.right = null;
-
         return newRoot;
     }
-
+    // solution-2: iterative
     public static TreeNode upsideDownBinaryTreeIterative(TreeNode root) {
         TreeNode curr = root;
         TreeNode next = null;

@@ -39,7 +39,6 @@ public class FindBinaryLeaves366 {
         }
 
         list.get(curr).add(root.val);
-
         return curr;
     }
 }

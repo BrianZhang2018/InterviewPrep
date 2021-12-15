@@ -29,7 +29,6 @@ public class ShortestWordDistanceII244 {
         List<Integer> l1 = map.get(word1), l2 = map.get(word2);
 
         int i=0, j=0, min = Integer.MAX_VALUE;
-
         while(i<l1.size() && j<l2.size()){
             min = Math.min(min, Math.abs(l1.get(i) - l2.get(j)));
             if(l1.get(i) < l2.get(j)){

@@ -11,26 +11,31 @@ import java.util.*;
 public class MaximumCalories {
 
     public static void main(String[] args) {
-        System.out.println(maximumMenuCalories(new ArrayList<>(Arrays.asList(2.0, 1.0, 1.0)),
-                new ArrayList<>(Arrays.asList(100, 10, 50)), 5.0));
+        System.out.println(maximumMenuCalories(
+                new ArrayList<>(Arrays.asList(2.0, 3.0, 1.0)), // prices
+                new ArrayList<>(Arrays.asList(100, 100, 50)), // calories
+                5.0)); // budget
     }
 
     // dp[p] (p is the spent amount): the maximum calories in when spent "p" amount
     public static int maximumMenuCalories(List<Double> prices, List<Integer> calories, Double budget) {
-        int b = (int)Math.ceil(budget);
-        int[] dp = new int[b+1];
+        int budget_int = (int) (budget*100);
+        int[] dp = new int[budget_int+1];
 
         Arrays.fill(dp, Integer.MIN_VALUE);
         dp[0] = 0;
         for(int i=0; i<prices.size(); i++) {
-            int p = (int)Math.floor(prices.get(i));
-            for(int j=p; j<=b; j++) {
-                if(dp[j-p] != Integer.MIN_VALUE) {
-                    dp[j] = Integer.max(dp[j], dp[j-p] + calories.get(i));
+            int price_int = (int)(prices.get(i) * 100);
+            for(int j=price_int; j<=budget_int; j++) { // j is the current spent amount
+                if(dp[j-price_int] != Integer.MIN_VALUE) {
+                    dp[j] = Integer.max(dp[j], dp[j-price_int] + calories.get(i));
                 }
             }
         }
 
-        return dp[b] == Integer.MIN_VALUE ? -1 : dp[b];
+        return dp[budget_int] == Integer.MIN_VALUE ? -1 : dp[budget_int];
     }
+
+    // similar with leetcode maximum scheduling job
+
 }

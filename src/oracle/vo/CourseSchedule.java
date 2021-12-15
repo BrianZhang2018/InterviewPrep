@@ -21,25 +21,24 @@ public class CourseSchedule {
 
     // CourseI
     public static boolean canFinish(int n, int[][] prerequisites) {
-        List<Integer>[] graph = new ArrayList[n]; // describe the adjacent relationship (you can use map here also)
-        int[] inDegree = new int[n];    //入度
-        List<Integer> preCourses = new ArrayList(); // you can also use a queue here
-
+        ArrayList<Integer>[] graph = new ArrayList[n]; // 要点1: build graph to describe the adjacent relationship (you can use map here also)
+        int[] inDegree = new int[n];    // 要点2: 入度
         for (int i = 0; i < n; ++i) graph[i] = new ArrayList<>();  //initiate the graph
 
         for (int[] e : prerequisites) {
             graph[e[1]].add(e[0]);  // e[1] is the prerequisite course of e[0], 收集所有依赖e[1]作为前驱的课程
             inDegree[e[0]]++;       // e[1]->e[0], so inDegree[e[0]]++, e[0]有多少前驱课程
         }
-        // find the start node -> inDegree = 0, 意味着它是起点
+
+        List<Integer> preCourses = new ArrayList();
+        // find the start node -> inDegree = 0, 意味着它是当前的起点
         for (int i = 0; i < n; ++i)
-            if (inDegree[i] == 0)
-                preCourses.add(i); //把入度为零的vertex放入前导课list
+            if (inDegree[i] == 0) preCourses.add(i); //把入度为零的vertex放入前导课list
 
         int index = 0;
         while (index < preCourses.size()) {
             for (int i : graph[preCourses.get(index)]) {
-                if (--inDegree[i] == 0)     // "--inDegree" when the prerequisite course has done
+                if (--inDegree[i] == 0)     // "--inDegree" means the prerequisite course has done
                     preCourses.add(i);
             }
             index++;
