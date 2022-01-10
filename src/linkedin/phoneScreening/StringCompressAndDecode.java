@@ -6,12 +6,15 @@ package linkedin.phoneScreening;
 public class StringCompressAndDecode {
 
     public static void main(String[] args) {
-        System.out.println(compress("aabbbc"));
+        System.out.println(compress("aaabbbc"));
         System.out.println(decode("A1b2c3"));
+        char[] cs = new char[26];
+        cs[1]++;
+        cs[1]++;
+        System.out.println(cs[1]);
     }
 
     public static String compress(String s){
-
         StringBuilder sb = new StringBuilder();
         int left = 0;
         char[] cs = s.toCharArray();
@@ -19,7 +22,7 @@ public class StringCompressAndDecode {
         while(left < s.length()){
             int count = 0;
             char c = cs[left];
-            while(left<s.length() && c == cs[left]){
+            while(left < s.length() && c == cs[left]){
                 left++;
                 count++;
             }
@@ -36,30 +39,29 @@ public class StringCompressAndDecode {
     public static String decode(String s){
         StringBuilder sb = new StringBuilder();
         char[] cs = s.toCharArray();
-        int index = 0; int k=0;
-        while(index < s.length()){
-            if(Character.isLetter(cs[index])){
-                if(k>=1){
+        int i = 0; int repeat=0;
+        while(i < s.length()){
+            if(Character.isLetter(cs[i])){
+                if(repeat>=1){
                     char c = sb.charAt(sb.length()-1);
-                    while(k-- > 1){
+                    while(repeat-- > 1){
                         sb.append(c);
                     }
                 }
-                sb.append(cs[index]);
+                sb.append(cs[i]);
             }else{
-                k = k*10 + cs[index] - '0';
+                repeat = repeat*10 + cs[i] - '0';
             }
-            index++;
+            i++;
         }
 
-        if(k!=0){
+        if(repeat!=0){
             char c = sb.charAt(sb.length()-1);
-            while(k-- >1){
+            while(repeat-- > 1){
                 sb.append(c);
             }
         }
 
         return sb.toString();
     }
-
 }

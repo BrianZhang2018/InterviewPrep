@@ -1,0 +1,6 @@
+系统设计面的设计FB messenger 这题grokking the system design interviews有大概的答案
+
+设计房产网站里面的搜索功能
+有两个已经知道的第三方的 api，一个api 可以拿到对应 timerange start 到end 的所有房子的listing id。
+一个api可以根据对应的一个房子 id ，拿到它的详细信息。
+根据上面的已知条件设计。
