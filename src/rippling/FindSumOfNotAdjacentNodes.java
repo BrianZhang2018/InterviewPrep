@@ -4,7 +4,6 @@ package rippling;
  * https://www.geeksforgeeks.org/maximum-sum-nodes-binary-tree-no-two-adjacent/
  */
 public class FindSumOfNotAdjacentNodes {
-
     public static void main(String[] args) {
         Node root = new Node(1);
         root.left = new Node(2);
@@ -12,7 +11,6 @@ public class FindSumOfNotAdjacentNodes {
         root.right.left = new Node(4);
         root.right.right = new Node(5);
         root.left.left = new Node(1);
-
         System.out.print(new FindSumOfNotAdjacentNodes().solution(root));
     }
 
@@ -22,9 +20,8 @@ public class FindSumOfNotAdjacentNodes {
     }
 
     public SubTreeSum dfs(Node root) {
-        if(root == null) {
+        if(root == null)
             return new SubTreeSum(0, 0);
-        }
 
         SubTreeSum left = dfs(root.left);
         SubTreeSum right = dfs(root.right);
@@ -38,6 +35,7 @@ public class FindSumOfNotAdjacentNodes {
     }
 }
 
+// customized class
 class SubTreeSum {
     int incl, excl;
     public SubTreeSum(int incl, int excl) {
@@ -46,6 +44,7 @@ class SubTreeSum {
     }
 }
 
+// provided class
 class Node
 {
     int value;

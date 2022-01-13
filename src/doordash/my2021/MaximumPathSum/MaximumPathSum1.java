@@ -4,12 +4,7 @@ import model.TreeNode;
 
 /**
  * the maximum path sum between two asterisk node which asterisk only leaf node
- *
  *  Example Tree 1
- #         5
- #     /      \  
- #    2        80
- #  /   \     /   \
  # *100 *50  *100  *15
  # ans = 287 = 100 + 2 + 5 + 80 + 100
 

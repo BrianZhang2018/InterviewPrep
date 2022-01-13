@@ -5,16 +5,15 @@ import java.util.*;
 
 /**
  * Print out the Maximum sum path
-
  *
  # Example Tree 2
- #       500
- #    /        \  
- #   *2        80*
- #  /  \      /   \
- # *100 *50  400*  151
-             /       \
-            100*     100*
+ #          500*
+ #       /        \
+ #     *2          80
+ #    /   \      /    \
+ # *100 *50   *200    151
+                         \
+                         100*
  # ans = 831
  * Created by brianzhang on 11/27/21.
  */
@@ -39,14 +38,12 @@ public class MaximumPathSum3 {
     static List<Integer> maxPath = new ArrayList<>();
     public static SubPathSum dfs(TreeNode root) {
         if(root == null) return null;
-
         SubPathSum left = dfs(root.left);
         SubPathSum right = dfs(root.right);
         left = left == null? new SubPathSum(0, false, new ArrayList<>()) : left;
         right = right == null? new SubPathSum(0, false, new ArrayList<>()) : right;
 
         if(root.isAsterisk) {
-
             if(left.isStartWithAsterisk && right.isStartWithAsterisk) {
                 if(root.val + Math.max(left.sum, right.sum) > maxPathSum) {
                     maxPathSum = root.val + Math.max(left.sum, right.sum);
@@ -62,11 +59,8 @@ public class MaximumPathSum3 {
                     maxPath = currPath;
                 }
             }
-
             return new SubPathSum(root.val, true, new ArrayList(Arrays.asList(root.val)));  // 剪枝 or leaf node
-
         }else{ // !root.isAsterisk
-
             if(left.isStartWithAsterisk && right.isStartWithAsterisk){
                 if(root.val + left.sum + right.sum > maxPathSum) {
                     maxPathSum = root.val + left.sum + right.sum;

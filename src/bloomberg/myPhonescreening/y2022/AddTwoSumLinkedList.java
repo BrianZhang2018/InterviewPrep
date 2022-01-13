@@ -1,13 +1,13 @@
 package bloomberg.myPhonescreening.y2022;
 
+// 2022-01-07
 // this is my version which I wrote during the phone interview
 public class AddTwoSumLinkedList {
 
     static Node sum(Node op1, Node op2) {
         Node o1 = reverse(op1);
         Node o2 = reverse(op2);
-
-        Node dummy = new Node(0);
+        Node dummy = new Node(0); // 死在这个dummy head, cao
         Node curr =dummy;
         int carryOver = 0;
         while(o1!=null && o2!=null) {

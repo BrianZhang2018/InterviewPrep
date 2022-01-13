@@ -5,7 +5,7 @@ public class OptimizedSolution {
     static Node sum(Node op1, Node op2) {
         Node o1 = reverse(op1), o2 = reverse(op2);
         Node dummy = new Node(0); // 套路: dummy head node
-        Node curr =dummy;
+        Node curr = dummy;
         int carryOver = 0;
         while(o1!=null || o2!=null) {
             int sum = 0;
