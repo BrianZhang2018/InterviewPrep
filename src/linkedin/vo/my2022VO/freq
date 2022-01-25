@@ -1,0 +1,20 @@
+Coding:
+-->1
+366 Find Leaves of Binary Tree
+373 Find K Pairs with Smallest Sums  (sum改成了product)
+560. Subarray Sum Equals K
+
+--> 2
+76 - Minimum Window Substring *
+706 - Design HashMap *
+380/381 - insert Delete GetRandom O(1)
+423 - All O`one Data Structure
+
+--> 3
+149 - max points on a line *
+716 - max stack
+
+System design:
+delayed task scheduler
+Key-value store
+TopK

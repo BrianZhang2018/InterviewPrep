@@ -6,7 +6,6 @@ import java.util.*;
  * Created by brianzhang on 12/1/20.
  */
 public class WordLadderWithPreCalculatedNeighborsGraph {
-
     // LEAD -> GOLD
     // LEAD -> LOAD -> GOAD -> GOLD
 
@@ -34,7 +33,6 @@ public class WordLadderWithPreCalculatedNeighborsGraph {
     // CAT
     // *AT, C*T, CA*
     // *OG, D*G, DO*
-
     public static void main(String[] args) {
         WordLadderWithPreCalculatedNeighborsGraph test = new WordLadderWithPreCalculatedNeighborsGraph();
         System.out.println(test.calculate(new HashSet(Arrays.asList("hot", "dot", "dog", "lot", "log", "cog")),"hit", "cog"));
@@ -79,7 +77,6 @@ public class WordLadderWithPreCalculatedNeighborsGraph {
     // PreCompute
     Map<String, List<String>> createEdgeMap(Set<String> dict, String input) {
         Map<String, List<String>> map = new HashMap();
-
         // APE
         // *PE -> [APE]
         // A*E -> [APE]

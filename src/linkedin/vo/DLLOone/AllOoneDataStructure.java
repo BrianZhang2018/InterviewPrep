@@ -1,35 +1,37 @@
 package linkedin.vo.DLLOone;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * https://leetcode.com/problems/all-oone-data-structure/
  * http://cqbbshuashua.blogspot.com/2018/04/432-all-oone-data-structure.html
  *
  * the difference compare with MaxStack:
- * 1. key is string, so use Map<String, DDLNode>
- * 2. Maintain an ordered LinkedList
+ * Maintain a descending ordered LinkedList since we need support getMax and getMin function.
+ *
+ *  map + linkedList
+ *
+ * e.g. dummyHead->5->4->3->2->tail
  *
  * Created by brianzhang on 11/23/20.
  */
 public class AllOoneDataStructure {
     public static void main(String[] args) {
         AllOoneDataStructure test = new AllOoneDataStructure();
-        test.inc("test1");
-        test.inc("test1");
-        test.inc("test2");
+        test.inc("hello");
+        test.inc("goodbye");
+        test.inc("hello");
+        test.inc("hello");
         System.out.println(test.getMaxKey());
-        System.out.println(test.getMinKey());
-        test.inc("test2");
-        test.inc("test2");
+        test.inc("leet");
+        test.inc("leet");
+        test.dec("hello");
+        test.inc("leet");
         System.out.println(test.getMaxKey());
-        System.out.println(test.getMinKey());
     }
 
     Map<String, DDLNode> map = new HashMap<>();
     DoubleLinkedList dll = new DoubleLinkedList();
-
     /** Inserts a new key <Key> with value 1. Or increments an existing key by 1. */
     public void inc(String key) {
         if (!map.containsKey(key)) {
@@ -59,13 +61,15 @@ public class AllOoneDataStructure {
     /** Returns one of the keys with maximal value. */
     public String getMaxKey() {
         if (map.isEmpty()) return "";
-        else return dll.head.next.key;
+        else
+            return dll.head.next.key;
     }
 
     /** Returns one of the keys with Minimal value. */
     public String getMinKey() {
         if (map.isEmpty()) return "";
-        else return dll.tail.prev.key;
+        else
+            return dll.tail.prev.key;
     }
 }
 
@@ -91,6 +95,7 @@ class DoubleLinkedList {
     public void remove(DDLNode node) {
         node.prev.next = node.next;
         node.next.prev = node.prev;
+        node.next = null; node.prev = null;// can skip this also
     }
 
     // front->back
@@ -101,18 +106,29 @@ class DoubleLinkedList {
         back.prev = front;
     }
 
-    public void moveForward(DDLNode node) {
+    public void moveForward(DDLNode node) { // when count increase
         while (node.prev != head && node.val > node.prev.val) {
             remove(node);
             insert(node, node.prev);
+            //swapNodes(node, node.prev); // not working here as the map hold the node still point old one after swap, but remove doesn't have this problem
         }
     }
 
-    public void moveBackward(DDLNode node) {
+    public void moveBackward(DDLNode node) { // when count decrease
         while (node.next != tail && node.val < node.next.val) {
-            DDLNode next = node.next; // be careful here
+            DDLNode next = node.next; // note: Since next line will remove "node.next", so the curr node.next will point to "node.next.next", so have to keep the original "node.next" this line.
             remove(node.next);
             insert(next, node);
+            //swapNodes(node.next, node);
         }
     }
+
+    /*public void swapNodes (DDLNode node1, DDLNode node2) {
+        int val = node2.val;
+        String key = node2.key;
+        node2.key = node1.key;
+        node2.val = node1.val;
+        node1.key = key;
+        node1.val = val;
+    }*/
 }

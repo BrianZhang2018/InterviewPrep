@@ -37,7 +37,6 @@ public class MinimumRemoveMakeValidParentheses {
         for(char c : sb.toString().toCharArray()){
             if (c == '*') count++;
         }
-
         return count;
     }
 }

@@ -1,4 +1,4 @@
-package linkedin.vo.recent;
+package linkedin.vo.DLLOone;
 
 import java.util.Stack;
 
@@ -8,9 +8,9 @@ import java.util.Stack;
  * f: 5
  * Created by brianzhang on 11/12/20.
  */
-public class MaxStack716 {
+public class MaxStackTwoStackSolution {
     public static void main(String[] args) {
-        MaxStack716 stack = new MaxStack716();
+        MaxStackTwoStackSolution stack = new MaxStackTwoStackSolution();
         stack.push(5);
         stack.push(1);
         stack.push(5);
@@ -23,42 +23,40 @@ public class MaxStack716 {
         System.out.println(stack.peekMax()); // -> 2
     }
 
-    Stack<Integer> data = new Stack<>();
-    Stack<Integer> maxTrack = new Stack<>();
-    public MaxStack716() {}
+    Stack<Integer> stack = new Stack<>();
+    Stack<Integer> maxNumTrack = new Stack<>(); // use to record current max number in each steps
+    public MaxStackTwoStackSolution() {}
     //O(1);
     public void push(int x) {
-        data.push(x);
-        if (maxTrack.isEmpty()) {
-            maxTrack.push(x);
-        }
-        else {
-            maxTrack.push(Math.max(x, maxTrack.peek()));
-        }
+        stack.push(x);
+        if (maxNumTrack.isEmpty())
+            maxNumTrack.push(x);
+        else
+            maxNumTrack.push(Math.max(x, maxNumTrack.peek()));
     }
     //O(1);
     public int pop() {
-        maxTrack.pop();
-        return data.pop();
+        maxNumTrack.pop();
+        return stack.pop();
     }
     //O(1);
     public int top() {
-        return data.peek();
+        return stack.peek();
     }
     //O(1);
     public int peekMax() {
-        return maxTrack.peek();
+        return maxNumTrack.peek();
     }
     //O(n);
     public int popMax() {
-        int res = maxTrack.peek();
-        Stack<Integer> tmp = new Stack<>();
+        int res = maxNumTrack.peek();
+        Stack<Integer> tmp = new Stack<>(); // temp stack
         while (top() != res) {
             tmp.push(pop());
         }
-        pop();
+        pop(); // remove the maximum number
         while (!tmp.isEmpty()) {
-            push(tmp.pop());
+            push(tmp.pop()); // push the back the number on top of maximum number in original stack
         }
         return res;
     }

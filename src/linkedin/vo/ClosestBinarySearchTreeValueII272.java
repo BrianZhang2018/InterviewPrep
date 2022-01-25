@@ -24,7 +24,6 @@ public class ClosestBinarySearchTreeValueII272 {
     public static List<Integer> closestKValues(TreeNode root, double target, int k) {
         Queue<Integer> queue = new LinkedList<>();
         Stack<TreeNode> stack = new Stack<>();
-
         TreeNode curr = root; // used to traverse the tree
         while(!stack.isEmpty() || curr != null){
             if(curr != null){
@@ -42,7 +41,6 @@ public class ClosestBinarySearchTreeValueII272 {
                         break;
                     }
                 }
-
                 curr = curr.right;
             }
         }

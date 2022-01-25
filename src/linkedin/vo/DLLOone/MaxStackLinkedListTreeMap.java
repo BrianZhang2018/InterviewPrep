@@ -6,8 +6,11 @@ import java.util.*;
  * https://www.lintcode.com/problem/max-stack/description
  * https://www.cnblogs.com/apanda009/p/7965683.html
  *
- * LinkedList to simulate a stack which reduce the remove operation to O(1)
- * TreeMap to get max value with nodes, O(logn)
+ * 1. LinkedList to simulate a stack which reduce the all remove operation to O(1)
+ * 2. TreeMap to get max value in nodes, O(logN)
+ *
+ * e.g.
+ * dummyHead->element1->element2->element3->tail
  *
  * Created by brianzhang on 11/26/20.
  */
@@ -47,6 +50,7 @@ public class MaxStackLinkedListTreeMap {
         return dll.peek();
     }
 
+    // logN
     public int peekMax() {
         return map.lastKey();
     }
@@ -58,6 +62,7 @@ public class MaxStackLinkedListTreeMap {
         dll.remove(node);
 
         if(list.size() == 0) map.remove(max);
+
         return max;
     }
 }
@@ -72,7 +77,6 @@ class Node{
 
 class DLL{ // double linkedList
     Node head, tail;
-
     public DLL(){
         head  = new Node(0);
         tail = new Node(0);
@@ -80,13 +84,11 @@ class DLL{ // double linkedList
         tail.prev = head;
     }
 
-    // add a new node before tail
+    // insert the new node before "tail" node
     public Node add(int val){
         Node n = new Node(val);
-        // link front pointer of new node
         tail.prev.next = n;
         n.prev = tail.prev;
-        // link back pointer of new node
         n.next = tail;
         tail.prev = n;
         return n;
@@ -105,5 +107,4 @@ class DLL{ // double linkedList
     public int peek(){
         return tail.prev.val;
     }
-
 }
