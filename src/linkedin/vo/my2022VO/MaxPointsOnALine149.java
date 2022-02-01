@@ -1,4 +1,4 @@
-package linkedin.vo;
+package linkedin.vo.my2022VO;
 
 import java.util.*;
 
@@ -18,6 +18,7 @@ import java.util.*;
 public class MaxPointsOnALine149 {
     public static void main(String[] args) {
         System.out.println(maxPoints(new int[][]{{1,1},{2,2},{3,3}}));
+        System.out.println((double)gcd((int)(1.2*10), (int)(1.5*10))/10);
     }
 
     public static int maxPoints(int[][] points) {

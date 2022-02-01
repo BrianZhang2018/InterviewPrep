@@ -1,16 +1,19 @@
-package linkedin.vo.DLLOone;
+package linkedin.vo.my2022VO.dataStructure.DLLOone;
 
 import java.util.*;
 
 /**
  * https://www.lintcode.com/problem/max-stack/description
+ * Design a "max stack" data structure that supports the stack operations and supports finding the stack's maximum element.
+ *
  * https://www.cnblogs.com/apanda009/p/7965683.html
  *
- * 1. LinkedList to simulate a stack which reduce the all remove operation to O(1)
+ * TreeMap + double linked List
+ * 1. Use double linked List to simulate a stack which reduce the all remove operation to O(1)
  * 2. TreeMap to get max value in nodes, O(logN)
  *
  * e.g.
- * dummyHead->element1->element2->element3->tail
+ * dummyHead->element1->element2->element3->tail (stack top)
  *
  * Created by brianzhang on 11/26/20.
  */
@@ -29,13 +32,13 @@ public class MaxStackLinkedListTreeMap {
         System.out.println(stack.peekMax()); // -> 2
     }
 
-    TreeMap<Integer, List<Node>> map = new TreeMap();
-    DLL dll = new DLL();
+    TreeMap<Integer, List<Node>> map = new TreeMap(); // store duplicate value node in list
+    DLL dll = new DLL(); // simulate a stack
 
     public MaxStackLinkedListTreeMap() {}
 
     public void push(int x) {
-        Node n = dll.add(x);
+        Node n = dll.insert(x);
         if(!map.containsKey(x)){
             map.put(x, new ArrayList());
         }
@@ -60,9 +63,7 @@ public class MaxStackLinkedListTreeMap {
         List<Node> list = map.get(max);
         Node node = list.remove(list.size()-1);
         dll.remove(node);
-
         if(list.size() == 0) map.remove(max);
-
         return max;
     }
 }
@@ -84,8 +85,8 @@ class DLL{ // double linkedList
         tail.prev = head;
     }
 
-    // insert the new node before "tail" node
-    public Node add(int val){
+    // always insert the new node before "tail" node
+    public Node insert(int val){
         Node n = new Node(val);
         tail.prev.next = n;
         n.prev = tail.prev;

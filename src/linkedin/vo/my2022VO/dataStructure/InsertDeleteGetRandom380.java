@@ -1,22 +1,19 @@
-package 高频xMyFavorites.insertDeleteGetRandomO1;
+package linkedin.vo.my2022VO.dataStructure;
 
 import java.util.*;
 
 /**
  * https://leetcode.com/problems/insert-delete-getrandom-o1/
  *
- * Freq 2, compass, linkedin
- *
  * follow up: allow duplicate number in the list
  *
  * Created by brianzhang on 11/30/20.
  */
 public class InsertDeleteGetRandom380 {
-
     public static void main(String[] args) {}
 
-    Map<Integer, Integer> map = new HashMap();
-    List<Integer> list = new ArrayList();
+    Map<Integer, Integer> map = new HashMap(); // value : index in the list
+    List<Integer> list = new ArrayList(); // store value
 
     public InsertDeleteGetRandom380() {}
 
@@ -38,8 +35,8 @@ public class InsertDeleteGetRandom380 {
         else{
             int index = map.get(val); //  get location of val in list
             int lastNum = list.get(list.size()-1);
-            list.set(index, lastNum); // override the number with last number in the list
-            map.put(lastNum, index);
+            list.set(index, lastNum); // override the target with last number
+            map.put(lastNum, index); // update
 
             // remove the val from map and list
             map.remove(val);

@@ -2,7 +2,7 @@ package linkedin.vo;
 
 /**
  * k colors, so compare with all colors for each house is very costly like PaintHouseI
- * so, we maintain a lastMin and lastSecondMin that we only compare it with with next house.
+ * so, we maintain a lastMin and lastSecondMin that we only compare it with next house.
  *
  * Created by brianzhang on 11/29/20.
  */

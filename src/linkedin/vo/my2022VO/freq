@@ -7,14 +7,52 @@ Coding:
 --> 2
 76 - Minimum Window Substring *
 706 - Design HashMap *
-380/381 - insert Delete GetRandom O(1)
-423 - All O`one Data Structure
+380/381 - insert Delete GetRandom O(1) *
 
 --> 3
 149 - max points on a line *
 716 - max stack
+432 - All O`one Data Structure *
 
-System design:
-delayed task scheduler
-Key-value store
-TopK
+################################################################
+>>>>Coding and Algorithms : Module 2
+==============================
+Flagship
+1. 380，insertDeleteGetRandom380381
+2. 297 (Serialize and Deserialize Binary Tree)，做完还有很多时间，
+给了个 bonus followup 是449 (Serialize and Deserialize BST)，优化是可以把转换成的 string 中的 null 给优化掉。面试官指导了很多，还是很有意思的算法。
+
+==============================
+1. 判断一个字符串的最长回文字串
+2. given a list of points on a 2d plance. implement a function
+def get_nearest_k_point(self, center) # center is a given point
+
+==============================
+
+基本上就是DFS搜索并回溯，记得回溯后，0要变回去1
+
+>>>>Coding-1
+39 (Combination Sum) + 149，第二题输入的坐标有可能是 double。。争了半天没弄清楚，按照面试官的意思强行写了个 HashMap 存 double 的斜率的方法。但是我觉得这方法至少在 java 里面还是跑不过的
+
+>>>>Data Structures & Algorithms
+设计一个key value store，constraint是一个机器上只有100k文件。你可以利用的接口是
+1. create a file
+2. delete a file
+3. append something to a file.
+
+My guess:
+706 - Design HashMap *
+716 - max stack
+432 - All O`one Data Structure *
+
+Complex System
+设计一个top k 系统统计分享最多的文章。需要 last 5 min last 1 hour, last 1 week etc.
+calendar
+rate limiter
+
+
+高频:
+149 - max points on a line *
+716 - max stack
+432 - All O`one Data Structure *
+380/381 - insert Delete GetRandom O(1) *

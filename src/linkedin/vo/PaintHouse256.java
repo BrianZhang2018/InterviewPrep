@@ -2,6 +2,8 @@ package linkedin.vo;
 
 /**
  * https://www.lintcode.com/problem/paint-house/my-submissions
+ *  no two adjacent houses have the same color
+ *
  * f : 2
  * leetcode 256, 265
  * Created by brianzhang on 11/20/20.

@@ -1,4 +1,4 @@
-package linkedin.vo.DLLOone;
+package linkedin.vo.my2022VO.dataStructure.DLLOone;
 
 import java.util.*;
 
@@ -6,11 +6,10 @@ import java.util.*;
  * https://leetcode.com/problems/all-oone-data-structure/
  * http://cqbbshuashua.blogspot.com/2018/04/432-all-oone-data-structure.html
  *
- * the difference compare with MaxStack:
- * Maintain a descending ordered LinkedList since we need support getMax and getMin function.
+ * Design a data structure to store the "strings' count" with the ability to return the strings with "minimum and maximum counts".
  *
- *  map + linkedList
- *
+ * Maintain a "descending ordered" LinkedList since we need support getMax and getMin function.
+ *  map + ordered DoubleLinkedList
  * e.g. dummyHead->5->4->3->2->tail
  *
  * Created by brianzhang on 11/23/20.
@@ -40,7 +39,7 @@ public class AllOoneDataStructure {
             dll.insert(node, dll.tail);
         } else {
             DDLNode node = map.get(key);
-            node.val++;
+            node.count++;
             dll.moveForward(node);
         }
     }
@@ -49,10 +48,10 @@ public class AllOoneDataStructure {
     public void dec(String key) {
         if (map.containsKey(key)) {
             DDLNode node = map.get(key);
-            if (node.val == 1)
+            if (node.count == 1)
                 dll.remove(node);
             else{
-                node.val--;
+                node.count--;
                 dll.moveBackward(node);
             }
         }
@@ -61,24 +60,22 @@ public class AllOoneDataStructure {
     /** Returns one of the keys with maximal value. */
     public String getMaxKey() {
         if (map.isEmpty()) return "";
-        else
-            return dll.head.next.key;
+        return dll.head.next.key;
     }
 
     /** Returns one of the keys with Minimal value. */
     public String getMinKey() {
         if (map.isEmpty()) return "";
-        else
-            return dll.tail.prev.key;
+        return dll.tail.prev.key;
     }
 }
 
 class DDLNode {
-    int val;
+    int count; // appear times
     String key;
     DDLNode prev, next;
-    public DDLNode(int val, String key) {
-        this.val = val;
+    public DDLNode(int count, String key) {
+        this.count = count;
         this.key = key;
     }
 }
@@ -95,10 +92,10 @@ class DoubleLinkedList {
     public void remove(DDLNode node) {
         node.prev.next = node.next;
         node.next.prev = node.prev;
-        node.next = null; node.prev = null;// can skip this also
+        //node.next = null; node.prev = null; // remove node, can skip
     }
 
-    // front->back
+    // front->back, insert front before back
     public void insert(DDLNode front, DDLNode back) {
         back.prev.next = front;
         front.prev = back.prev;
@@ -107,7 +104,7 @@ class DoubleLinkedList {
     }
 
     public void moveForward(DDLNode node) { // when count increase
-        while (node.prev != head && node.val > node.prev.val) {
+        while (node.prev != head && node.count > node.prev.count) {
             remove(node);
             insert(node, node.prev);
             //swapNodes(node, node.prev); // not working here as the map hold the node still point old one after swap, but remove doesn't have this problem
@@ -115,20 +112,10 @@ class DoubleLinkedList {
     }
 
     public void moveBackward(DDLNode node) { // when count decrease
-        while (node.next != tail && node.val < node.next.val) {
-            DDLNode next = node.next; // note: Since next line will remove "node.next", so the curr node.next will point to "node.next.next", so have to keep the original "node.next" this line.
+        while (node.next != tail && node.count < node.next.count) {
+            DDLNode next = node.next; // Since next line will remove "node.next", so the curr node.next will point to "node.next.next", we have to keep the original "node.next" this line.
             remove(node.next);
             insert(next, node);
-            //swapNodes(node.next, node);
         }
     }
-
-    /*public void swapNodes (DDLNode node1, DDLNode node2) {
-        int val = node2.val;
-        String key = node2.key;
-        node2.key = node1.key;
-        node2.val = node1.val;
-        node1.key = key;
-        node1.val = val;
-    }*/
 }
