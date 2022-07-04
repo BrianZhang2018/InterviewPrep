@@ -5,7 +5,7 @@ import java.util.*;
 /**
  * https://leetcode.com/problems/merge-intervals/
  *
- * Follow up question: InsertInterval
+ * Followup question: InsertInterval
  *
  * Created by brianzhang on 5/10/20.
  */
@@ -18,8 +18,7 @@ public class MergeInterval {
     }
 
     public int[][] merge(int[][] intervals) {
-        if(intervals == null || intervals.length == 0)
-            return intervals;
+        if(intervals == null || intervals.length == 0) return intervals;
 
         //1. sort by first element in the array
         Arrays.sort(intervals, (s1, s2) -> Integer.compare(s1[0], s2[0])); // Comparator.comparingInt(s -> s[0])

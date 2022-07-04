@@ -1,4 +1,4 @@
-package linkedin.vo;
+package linkedin.vo.others;
 
 /**
  * https://www.lintcode.com/problem/paint-house/my-submissions

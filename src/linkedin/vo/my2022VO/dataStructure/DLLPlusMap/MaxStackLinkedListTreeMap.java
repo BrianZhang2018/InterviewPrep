@@ -1,4 +1,4 @@
-package linkedin.vo.my2022VO.dataStructure.DLLOone;
+package linkedin.vo.my2022VO.dataStructure.DLLPlusMap;
 
 import java.util.*;
 
@@ -13,7 +13,7 @@ import java.util.*;
  * 2. TreeMap to get max value in nodes, O(logN)
  *
  * e.g.
- * dummyHead->element1->element2->element3->tail (stack top)
+ * dummyHead->element1->element2->element3->tail(stack top)
  *
  * Created by brianzhang on 11/26/20.
  */
@@ -32,26 +32,22 @@ public class MaxStackLinkedListTreeMap {
         System.out.println(stack.peekMax()); // -> 2
     }
 
-    TreeMap<Integer, List<Node>> map = new TreeMap(); // store duplicate value node in list
+    TreeMap<Integer, List<Node>> map = new TreeMap(); // key : nodes with same key
     DLL dll = new DLL(); // simulate a stack
 
     public MaxStackLinkedListTreeMap() {}
 
     public void push(int x) {
-        Node n = dll.insert(x);
+        Node n = dll.insert(x); // insert to the tail
         if(!map.containsKey(x)){
             map.put(x, new ArrayList());
         }
         map.get(x).add(n);
     }
 
-    public int pop() {
-        return dll.remove();
-    }
+    public int pop() { return dll.remove(dll.tail.prev).val;} //  remove the tail.prev
 
-    public int top() {
-        return dll.peek();
-    }
+    public int top() { return dll.peek();} //
 
     // logN
     public int peekMax() {
@@ -59,7 +55,7 @@ public class MaxStackLinkedListTreeMap {
     }
 
     public int popMax() {
-        int max = map.lastKey(); // retrieve the last or the highest key present in the map
+        int max = map.lastKey();
         List<Node> list = map.get(max);
         Node node = list.remove(list.size()-1);
         dll.remove(node);
@@ -76,7 +72,7 @@ class Node{
     }
 }
 
-class DLL{ // double linkedList
+class DLL{ // double linked List
     Node head, tail;
     public DLL(){
         head  = new Node(0);
@@ -99,10 +95,6 @@ class DLL{ // double linkedList
         node.prev.next = node.next;
         node.next.prev = node.prev;
         return node;
-    }
-
-    public int remove(){ // remove the last node before tail
-        return remove(tail.prev).val;
     }
 
     public int peek(){

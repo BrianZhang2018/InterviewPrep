@@ -1,4 +1,4 @@
-package linkedin.vo;
+package linkedin.vo.others;
 
 /**
  * https://www.lintcode.com/problem/longest-substring-with-at-most-two-distinct-characters/description

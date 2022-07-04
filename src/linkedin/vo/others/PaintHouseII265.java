@@ -1,4 +1,4 @@
-package linkedin.vo;
+package linkedin.vo.others;
 
 /**
  * k colors, so compare with all colors for each house is very costly like PaintHouseI

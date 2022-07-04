@@ -1,4 +1,4 @@
-package linkedin.vo;
+package linkedin.vo.others;
 
 import javafx.util.Pair;
 import java.util.*;

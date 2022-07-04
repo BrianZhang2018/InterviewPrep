@@ -1,7 +1,5 @@
 package linkedin.vo.my2022VO.dataStructure;
 
-import sun.awt.image.ImageWatched;
-
 import java.util.*;
 
 /**
@@ -17,6 +15,7 @@ public class InsertDeleteGetRandom381 {
         System.out.println(test.insert(1));
         System.out.println(test.insert(1));
     }
+
     Map<Integer, LinkedHashSet<Integer>> map;
     List<Integer> list;
     Random rand = new Random();

@@ -1,4 +1,4 @@
-package linkedin.vo;
+package linkedin.vo.others;
 
 /**
  * https://www.cnblogs.com/apanda009/p/7945036.html

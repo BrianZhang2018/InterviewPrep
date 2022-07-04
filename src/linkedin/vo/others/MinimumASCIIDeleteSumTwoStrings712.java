@@ -1,4 +1,4 @@
-package linkedin.vo;
+package linkedin.vo.others;
 
 /**
  * https://leetcode.com/problems/minimum-ascii-delete-sum-for-two-strings/

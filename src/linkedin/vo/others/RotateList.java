@@ -1,4 +1,4 @@
-package linkedin.vo;
+package linkedin.vo.others;
 
 import category.model.ListNode;
 

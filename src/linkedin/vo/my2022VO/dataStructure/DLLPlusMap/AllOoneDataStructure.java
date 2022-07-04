@@ -1,8 +1,9 @@
-package linkedin.vo.my2022VO.dataStructure.DLLOone;
+package linkedin.vo.my2022VO.dataStructure.DLLPlusMap;
 
 import java.util.*;
 
 /**
+ * 432
  * https://leetcode.com/problems/all-oone-data-structure/
  * http://cqbbshuashua.blogspot.com/2018/04/432-all-oone-data-structure.html
  *
