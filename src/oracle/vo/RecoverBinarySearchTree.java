@@ -1,6 +1,6 @@
 package oracle.vo;
 
-import category.tree.BinaryTree.BinaryTreeUtil;
+import category.Tree.BinaryTree.BinaryTreeUtil;
 import category.model.TreeNode;
 
 /**

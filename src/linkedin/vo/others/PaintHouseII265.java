@@ -1,7 +1,7 @@
 package linkedin.vo.others;
 
 /**
- * k colors, so compare with all colors for each house is very costly like PaintHouseI
+ * K colors (PaintHouseI only three colors), means compare with all colors for each house is very costly like PaintHouseI
  * so, we maintain a lastMin and lastSecondMin that we only compare it with next house.
  *
  * Created by brianzhang on 11/29/20.
@@ -13,19 +13,23 @@ public class PaintHouseII265 {
 
     public static int minCostII(int[][] costs) {
         if (costs == null || costs.length == 0) return 0;
+        int numOfColorOptions = costs[0].length;
 
-        int lastMin = 0, lastSecondMin = 0, lastIndex = 0;
+        int lastMin = 0;
+        int lastSecondMin = 0;
+        int lastIndex = 0;
         for (int i = 0; i < costs.length; i++) {
 
-            int currMin = Integer.MAX_VALUE, currSecondMin = Integer.MAX_VALUE, currIndex = -1;
-            for (int j = 0; j < costs[0].length; j++) { // calculate min and secondMin with each color (and cost)
-                costs[i][j] += (j != lastIndex ? lastMin : lastSecondMin); // j represent the color and cost, chose non-adjacent color
+            int currMin = Integer.MAX_VALUE;
+            int currSecondMin = Integer.MAX_VALUE;
+            int currIndex = -1;
+            for (int j = 0; j < numOfColorOptions; j++) { // calculate min and secondMin with each color (and cost)
+                costs[i][j] += (j != lastIndex ? lastMin : lastSecondMin); // "j" represent the color and cost, chose non-adjacent color
                 if (costs[i][j] < currMin) {
                     currSecondMin = currMin;
                     currMin = costs[i][j];
                     currIndex = j;
-                }
-                else if (costs[i][j] < currSecondMin) {
+                } else if (costs[i][j] < currSecondMin) {
                     currSecondMin = costs[i][j];
                 }
             }
@@ -34,6 +38,7 @@ public class PaintHouseII265 {
             lastSecondMin = currSecondMin;
             lastIndex = currIndex;
         }
+
         return lastMin;
     }
 }
