@@ -34,9 +34,11 @@ public class FindLeavesOfBinaryTree{
     public static int dfs(TreeNode node, List<List<Integer>> res){
         if(node == null) return 0; // note
             
-        int left  = dfs(node.left, res), right = dfs(node.right, res);
+        int left  = dfs(node.left, res);
+        int right = dfs(node.right, res);
         System.out.println("left: " + left + " , " + "right: " + right);
         int height = Math.max(left, right) ; // leaf node height is "0"
+
         if(res.size() == height) res.add(new ArrayList<>());
         res.get(height).add(node.val);
 

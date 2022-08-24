@@ -3,7 +3,8 @@ package salesforce;
 import java.util.Arrays;
 
 /**
- *  solve this is to pad the integers to the same size by repeating the digits then sort using these repeated integers as a sort key.
+ * solve this is to pad the integers to the same size by repeating the digits
+ * then sort using these repeated integers as a sort key.
  *
  * Created by brianzhang on 11/4/21.
  */

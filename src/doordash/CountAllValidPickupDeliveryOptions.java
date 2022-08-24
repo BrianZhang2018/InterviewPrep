@@ -29,7 +29,6 @@ public class CountAllValidPickupDeliveryOptions {
     public static int getAllOptions(int n) {
         int mod = 1_000_000_007;
         long res = 1;
-
         for (int i = 1; i <= n; i++) {
             res = res * (i * 2 - 1) * i % mod;
         }
@@ -46,9 +45,7 @@ public class CountAllValidPickupDeliveryOptions {
      */
     // 给一串String 判断是不是Valid. P一定要在D前面 并且 有P1就得有D1， 有P2就得有D2， 只有D2没P2就不行
     public static boolean isValidPD(String pdStr){
-
         List<String> ps = new ArrayList();
-
         String[] pds = pdStr.split(",");
 
         for(String str : pds){
@@ -56,7 +53,6 @@ public class CountAllValidPickupDeliveryOptions {
                 if(ps.isEmpty() || !ps.contains(str.substring(1))){
                     return false;
                 }
-
                 ps.remove(str.substring(1));
             }
 

@@ -1,4 +1,4 @@
-package doordash.my2021.myDianMian;
+package doordash.my2021.dianMian;
 
 import java.util.*;
 
@@ -37,5 +37,4 @@ public class MaximumCalories {
     }
 
     // similar with leetcode maximum scheduling job
-
 }

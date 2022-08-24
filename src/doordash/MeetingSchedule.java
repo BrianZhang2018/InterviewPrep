@@ -8,14 +8,13 @@ import java.util.*;
  * Created by brianzhang on 7/21/20.
  */
 public class MeetingSchedule {
-
     public static void main(String[] args) {
-
         int[][] input = {{3, 20}, {-2, 0}, {0, 2}, {16, 17}, {19, 23}, {30, 40}, {27, 33}};
         for (int[] i : minAvailableDuration(input, -5, 27, 2))
             System.out.println(Arrays.toString(i));
 
-        System.out.println(Arrays.toString(meetingSchedule1229(new int[][]{{10, 50}, {60, 120}, {140, 210}}, new int[][]{{0, 15}, {60, 70}}, 8)));
+        System.out.println(Arrays.toString(
+                meetingSchedule1229(new int[][]{{10, 50}, {60, 120}, {140, 210}}, new int[][]{{0, 15}, {60, 70}}, 8)));
     }
 
     public static List<int[]> minAvailableDuration(int[][] slots, int startTime, int endTime, int duration) {
@@ -34,7 +33,6 @@ public class MeetingSchedule {
 
         return res;
     }
-
 
     public static int[] meetingSchedule1229(int[][] slots1, int[][] slots2, int duration) {
 
