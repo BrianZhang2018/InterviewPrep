@@ -8,10 +8,10 @@ import java.util.*;
  * Classic DFS
  * Created by brianzhang on 10/9/18.
  */
-public class LetterCombinations {
+public class LetterCombinationsOfAPhoneNumber {
 
     public static void main(String[] args) {
-        System.out.println(new LetterCombinations().letterCombinations("23"));
+        System.out.println(new LetterCombinationsOfAPhoneNumber().letterCombinations("23"));
     }
 
     public List<String> letterCombinations(String digits) {

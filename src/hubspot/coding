@@ -1,0 +1,43 @@
+merge sorted 2 list, return top k elements
+followup
+merge sorted n list return top k elements
+
+Youtube
+client request singed url, aws access key, s3 bucket info from server
+, then upload file from client side.
+
+
+1. New feed database. 问设计数据库，然后如何写query，主要是pagination 和 index
+    a. pagination -
+            offset (et charge-off rate ),
+                1. requires two parameters in the query: a limit and an offset, It generally has a worst-case complexity of o(n).
+                2. good for static data query
+            cursor (is better that, e.g. response contain nextCursor):
+                    1. Cursor pagination, as stated above, is a unique pointer to a particular record.
+                    2. With the help of cursors, one gets rid of the need to read all the rows that have already been seen with the WHERE clause’s help.
+                        Thus, this makes its complexity o(1).
+                    3. good for non-static data in db, e.g frequenlty delete or add new records
+                  https://betterprogramming.pub/building-apis-a-comparison-between-cursor-and-offset-pagination-88261e3885f8
+
+       example of offset pigination bad: 100-200th, but 99th got deleted, means the original 101th is 100th now, so original 100th got missed if we query 100-200th using offset pagination
+    b. https://www.dbta.com/Columns/DBA-Corner/Top-10-Steps-to-Building-Useful-Database-Indexes-100498.aspx
+    c. https://docs.microsoft.com/en-us/azure/architecture/best-practices/data-partitioning
+
+sharding (horizontal partition)    vs      partitioning (vertical partition)        vs          indexing
+distributed data into                     partition data into subtable in same machine         index is add on for partitioning to speed up the query
+multiple machines to increase             (splitting a table based on range, category or combination of both for easy and fast accessibility)
+data availability
+
+Partitioning refers to splitting a table based on range, category or combination of both for easy and fast accessibility. Say, splitting one huge word document into several smaller documents and having one reference document to navigate to all the other.
+Index is similar to table of contents page with an hyperlink. Instead of scanning the complete document line by line , you can easily jump to the section you want. This improves the scanning speed.
+In practical, index are used in both partitioned and non partitioned tables, it is a common object type, whereas partitioned tables improve efficiency in case of very huge tables, particularly OLAP tables.
+
+partitioning types
+https://www.postgresql.org/docs/current/ddl-partitioning.html,
+
+list partitioning example: https://docs.oracle.com/database/121/VLDBG/GUID-8928C3B0-2F83-4213-B765-EFBBF0372F64.htm
+
+2. 设计一个weather service，很简单，数据源是外部一个source，其实就是爬虫，存数据库，然后return 回去
+
+3. 老题Merge K sorted list
+4. BQ, 瞎扯一小时

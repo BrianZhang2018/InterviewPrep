@@ -1,6 +1,6 @@
 package salesforce;
 
-import java.util.Arrays;
+import java.util.*;
 
 /**
  * solve this is to pad the integers to the same size by repeating the digits
@@ -12,6 +12,23 @@ public class HighestElementConcatenator {
 
     public static void main(String[] args) {
         System.out.println(solution(new String[]{"8", "89", "10", "15", "2"}));
+    }
+
+    public int[] frequencySort(int[] nums) {
+        Map<Integer, Integer> map = new HashMap();
+        for(int i : nums) {
+            map.put(i, map.getOrDefault(i, 0) + 1);
+        }
+
+        Arrays.stream(nums).boxed().sorted( (a, b) -> {
+            if(map.get(a) == map.get(b)) {
+                return b-a;
+            }
+
+            return map.get(a) - map.get(b);
+        });
+
+        return nums;
     }
 
     public static String solution(String[] input) {
