@@ -1,5 +1,6 @@
-package square.oa2022;
+package square.my2022onsite;
 
+// is this single player?
 class Player {
     Direction direction;
     int row, column;
@@ -143,6 +144,7 @@ public class Game {
         Game game = new Game(3, 3);
         Player player = game.placePlayer(1,1, Direction.EAST);
         game.printBoard();
+        System.out.println("After Move:");
         game.movePlayerByCommand("FF", player);
         game.printBoard();
     }

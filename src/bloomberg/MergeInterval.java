@@ -10,7 +10,6 @@ import java.util.*;
  * Created by brianzhang on 5/10/20.
  */
 public class MergeInterval {
-
     public static void main(String[] args) {
         MergeInterval mi = new MergeInterval();
         for(int[] res : mi.merge(new int[][]{{1,4}, {5,6}}))

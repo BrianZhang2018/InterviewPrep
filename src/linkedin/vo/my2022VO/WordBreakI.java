@@ -5,19 +5,18 @@ import java.util.*;
 /**
  * https://leetcode.com/problems/word-break/
  *
- * time complexity: n^2
+ * time complexity: 2^n, https://leetcode.com/problems/word-break/discuss/169383/solved-The-Time-Complexity-of-The-Brute-Force-Method-Should-Be-O(2n)-and-Prove-It-Below
  * Created by brianzhang on 1/9/19.
  */
 public class WordBreakI {
     public static void main(String[] args) {
-        // System.out.println(wordBreak("leetco", new HashSet<>(Arrays.asList("leet", "co"))));
-
-        System.out.println(wordBreakDFSMemo("catsandog", new HashSet<>(Arrays.asList("cats","dog","sand","and","cat")), new HashMap<>()));
+        //System.out.println(wordBreak("leetco", new HashSet<>(Arrays.asList("leet", "co"))));
+        System.out.println(wordBreakDFS("goalspecial",  new HashSet<>(Arrays.asList("go","goal","goals","special"))));
         res.forEach(s -> System.out.println(s));
+        // System.out.println(wordBreakDFS("catsandog", new HashSet<>(Arrays.asList("cats","dog","sand","and","cat"))));
     }
 
-    // Solution-1
-    // DP递推, O(n^2) ("n square" Or "n to the power 2") - Bottom-Up solution
+    // Solution-1: DP递推, O(n^2) ("n square" Or "n to the power 2") - Bottom-Up solution
     public static boolean wordBreak(String s, Set<String> dict) {
         if (s == null || s.length() == 0) return false;
         int n = s.length();
@@ -34,9 +33,13 @@ public class WordBreakI {
         return dp[n - 1];
     }
 
-    // Solution-2
-    static List<String> res = new ArrayList<>();
-    // DFS (记忆化递归), time complexity: n^2, Top-Down solution
+    // Solution-2: DFS (记忆化递归), time complexity: n^2, Top-Down solution
+    public static boolean wordBreakDFS(String s, Set<String> wordDict) {
+        //return wordBreakDFSMemo(s, wordDict, new HashMap());
+        return wordBreakDFSMemo1(s, 0, wordDict, new HashMap());
+    }
+
+    static List<String> res = new ArrayList<>(); // can add this to print out the result
     public static boolean wordBreakDFSMemo(String s, Set<String> dict, Map<String, Boolean> memo) {
         if (memo.containsKey(s)) return memo.get(s);
 
@@ -45,9 +48,8 @@ public class WordBreakI {
             memo.put(s, true);
             return true;
         }
-
         for (int i = 1; i < s.length(); i++) {
-            // For '&&' condition, if 'dict.contains(s.substring(0, i))' is false, won't run the ' wordBreak(s.substring(i), dict, memo)'
+            // For '&&' condition, if 'dict.contains(s.substring(0, i))' is false, won't run the 'wordBreak(s.substring(i), dict, memo)'
             if (dict.contains(s.substring(0, i)) && wordBreakDFSMemo(s.substring(i), dict, memo)) {
                 res.add(s.substring(0, i));
                 memo.put(s, true);
@@ -58,8 +60,30 @@ public class WordBreakI {
         memo.put(s, false);
         return false;
     }
-    // Solution-3
-    // BFS, https://leetcode.com/problems/word-break/discuss/43797/A-solution-using-BFS
+
+    // Good example to demonstrate how memo works which record the sub-result status
+    public static boolean wordBreakDFSMemo1(String s, int start, Set<String> dict,
+                                            Map<String, Boolean> memo) {
+        if(start == s.length()) return true;
+        if (memo.containsKey(s)) return memo.get(s);
+
+        if (dict.contains(s)) {
+            memo.put(s, true);
+            return true;
+        }
+        for (int i = start; i < s.length(); i++) {
+            String str = s.substring(start, i + 1);
+            if (dict.contains(str) && wordBreakDFSMemo1(s, i + 1, dict, memo)) {
+                memo.put(s, true);
+                return true;
+            }
+        }
+
+        memo.put(s.substring(start), false); // memorize the substring status, not original string
+        return false;
+    }
+
+    // Solution-3: BFS, https://leetcode.com/problems/word-break/discuss/43797/A-solution-using-BFS
     public static boolean wordBreakBFSMemo(String s, Set<String> wordDict) {
         if (wordDict.contains(s)) return true;
         Queue<Integer> queue = new LinkedList<>();
@@ -83,24 +107,23 @@ public class WordBreakI {
     }
 
     // best performance solution from leetcode
-    class Solution
-    {
+    class Solution {
         // DFS
-        public boolean wordBreak(String s, List<String> wordDict)
-        {
+        public boolean wordBreak(String s, List<String> wordDict) {
             boolean[] visited = new boolean[s.length() + 1];
             return dfs(s, 0, wordDict, visited);
         }
-        private boolean dfs(String s, int start, List<String> wordDict, boolean[] visited)
-        {
-            for (String word : wordDict)
-            {
+
+        private boolean dfs(String s, int start, List<String> wordDict,
+                            boolean[] visited) {
+            for (String word : wordDict) {
                 int nextStart = start + word.length();
                 if (nextStart > s.length() || visited[nextStart]) continue;
 
-                if (s.indexOf(word, start) == start)
-                {
-                    if (nextStart == s.length() || dfs(s, nextStart, wordDict, visited)) return true;
+                if (s.indexOf(word, start) == start) {
+                    if (nextStart == s.length() || dfs(s, nextStart, wordDict, visited)) {
+                        return true;
+                    }
                     visited[nextStart] = true;
                 }
             }

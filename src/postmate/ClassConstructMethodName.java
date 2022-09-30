@@ -1,7 +1,6 @@
 package postmate;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by brianzhang on 6/20/20.

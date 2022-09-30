@@ -11,7 +11,13 @@ public class SortedArrayKthElement {
     public static int helper(int[] arr1, int[] arr2, int k) {
         if (arr1.length + arr2.length < k) return -1;
 
-        int[] sortedArr = new int[arr1.length + arr2.length];
+        int[] sortedArr;
+        if (arr1.length + arr2.length < k) {
+            sortedArr = new int[arr1.length + arr2.length];
+        } else {
+            sortedArr = new int[k];
+        }
+
         int p1 = 0, p2 = 0, count = 0;
         while (p1 < arr1.length || p2 < arr2.length) {
             if (p1 == arr1.length) {
@@ -28,7 +34,6 @@ public class SortedArrayKthElement {
         }
 
         //if(sortedArr.length == k) return sortedArr[sortedArr.length-1];
-
         return -1;
     }
 }

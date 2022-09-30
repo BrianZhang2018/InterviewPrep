@@ -26,7 +26,6 @@ https://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid=643718&ctid=230578
 第五，这是数据库specific的，尽量用row lock而不是table lock。如果你是update 某个特定的row，可以允许其他process update同一个table的其他row，也可以减少blocking。
 最后，这个跟数据库关系不大，就是尽量用immutable的资源，这样就不需要lock了。
 
-
 Post /search:
 request: {
             city,
@@ -37,31 +36,41 @@ request: {
             numOfPeople,
             numOfRooms
         }
-
-response:{  按房间类型返回
-
-          "Queen":{
-                    roomId,
-                    price,
+response:  按房间类型返回
+         [ "Queen":{
                     numOfAvailableRoom: n,
+                    rooms: [
+                        {
+                        roomId,
+                        price,
+                        isAllowSmoke,
+                        ...
+                        },
+                      ]
                   },
           "King": {
-                    roomId,
-                    price,
                     numOfAvailableRoom: n,
-                  }
-         }
+                    rooms: [
+                        {
+                        roomId,
+                        price,
+                        isAllowSmoke,
+                        ...
+                        },
+                     ]
+                  },
+             ...
+         ]
 
 Post /book:
-
 request:{
     guestId,
     checkInDate,
     checkOutDate,
     made_by,
     rooms:[
-            {type: "queen", numOfRooms: 2, price: 100},
-            {type: "king", numOfRooms: 2m price: 90},
+            {roomType: "queen", numOfRooms: 2, price: 100},
+            {roomType: "king", numOfRooms: 2, price: 90},
           ]
 }
 
@@ -69,7 +78,6 @@ response:{
     confirmation_number,
     status,  // success, failed
 }
-
 
 Transaction VS table lock
 
