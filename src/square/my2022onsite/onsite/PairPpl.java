@@ -7,6 +7,11 @@ import java.util.*;
 // [[alex, bob], [cindy, brian]]
 // [[alex, cindy], [bob, cindy]]
 // [[alex, brian], [bob, brian]]
+/**
+ * Combination problem
+ *
+ * note: name the variable meaningful to avoid the confusing in coding
+ */
 public class PairPpl {
     public static void main(String[] args) {
         PairPpl test = new PairPpl();
@@ -18,10 +23,34 @@ public class PairPpl {
                 "cindy", "brian"}).toArray()));
     }
 
-    Map<String, List<String>> map = new HashMap<>();
-
-    // right combination solution, compare with below function which is permutation solution that twist to combination
+    List<String> memo = new ArrayList<>();
     public List<String[]> helper(String[] input) {
+        List<String> used = new ArrayList<>();
+        for (int i = 0; i < input.length; i++) {
+            if (used.contains(input[i])) continue;
+            for (int j = i + 1; j < input.length; j++) {
+                if (used.contains(input[j])) continue;
+                String from = input[i], to = input[j];
+                if (!memo.contains(from+to) && !memo.contains(to+":"+from)) {
+                    used.add(from);
+                    used.add(to);
+                    memo.add(from+":"+to); // common tricky: simplified the data structure with string
+                    memo.add(to+":"+from);
+                    break;
+                }
+            }
+        }
+
+        List<String[]> res = new ArrayList<>();
+        for(int i=0, j=1; j<used.size(); i+=2, j+=2) {
+            res.add(new String[] {used.get(i), used.get(j)});
+        }
+        return res;
+    }
+
+    // combination solution with map memo
+    Map<String, List<String>> map = new HashMap<>();
+    public List<String[]> helper1(String[] input) {
         List<String[]> res = new ArrayList<>();
         List<String> visited = new ArrayList<>();
         for (int i = 0; i < input.length; i++) {
@@ -31,16 +60,12 @@ public class PairPpl {
                 if (map.size() == 0 || map.get(input[i]) == null || !map.get(input[i]).contains(input[j])) {
                     String from = input[i], to = input[j];
                     res.add(new String[]{from, to});
-                    List fromList = map.getOrDefault(from, new ArrayList<>());
-                    fromList.add(to);
-                    map.put(from, fromList);
+                    map.putIfAbsent(from, new ArrayList<>());
+                    map.get(from).add(to);
+                    map.putIfAbsent(to, new ArrayList<>());
+                    map.get(to).add(from);
 
-                    List toList = map.getOrDefault(to, new ArrayList<>());
-                    toList.add(from);
-                    map.put(to, toList);
-
-                    visited.add(from);
-                    visited.add(to);
+                    visited.addAll(Arrays.asList(from, to));
                     break;
                 }
             }
@@ -49,7 +74,8 @@ public class PairPpl {
         return res;
     }
 
-    public List<String[]> helper1(String[] input) {
+    // bad solution with permutation way
+    public List<String[]> helper2(String[] input) {
         List<String[]> res = new ArrayList<>();
         List<String> visited = new ArrayList<>();
         for (String from : input) {

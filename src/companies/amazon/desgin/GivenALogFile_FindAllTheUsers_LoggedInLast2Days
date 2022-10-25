@@ -1,0 +1,7 @@
+https://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid=472084
+
+Given a file of logs Log(userid, timestamp), find all users have logged in last 2 days.
+Follow up 1: 你用了两个set来记录两天中出现的用户(bitSet day1, bitSet day2, then day1 and day2 - Dong guessing)，
+能不能只用一个collection？我想了一下改成了Map<user, timestamp>
+Follow up 2: 如果让你查询last 7 days呢？我说可以用Map存一个bitset，Map<user, BitSet(7)>，在遍历log的过程中一旦发现bitset中全是1，那么就记录一下这个user
+Follow up 3: 如果让你查询非连续的天数，比如让你查第3天，第5天，以及第7天的呢？我说最终满足条件的bitset可以根据输入动态的定，在这种情况下满足条件的结果是 (0010101).

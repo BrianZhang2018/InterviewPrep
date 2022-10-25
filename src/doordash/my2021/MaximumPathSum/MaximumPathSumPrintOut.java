@@ -5,7 +5,6 @@ import java.util.*;
 
 /**
  * Print out the Maximum sum path
- *
  # Example Tree 2
  #          500*
  #       /        \
@@ -17,7 +16,7 @@ import java.util.*;
  # ans = 831
  * Created by brianzhang on 11/27/21.
  */
-public class MaximumPathSum3 {
+public class MaximumPathSumPrintOut {
     public static void main(String[] args) {
         TreeNode root = new TreeNode(500, false);
         root.left = new TreeNode(2, true);
@@ -76,7 +75,7 @@ public class MaximumPathSum3 {
                 List<Integer> currPath = left.isStartWithAsterisk ? left.path : right.path;
                 currPath.add(root.val);
                 return new SubPathSum(root.val + (left.isStartWithAsterisk ? left.sum: right.sum), true, currPath); // 记住是自底向上看问题,当递归回到中间的节点which problem can be solved base on 已解决的下层节点
-            }/*else{ // if no asterisk, just cut it, we don't need care it at all }*/
+            }/*else{ // if no asterisk, just cut it, we don't need to care it at all }*/
 
             return null;
         }

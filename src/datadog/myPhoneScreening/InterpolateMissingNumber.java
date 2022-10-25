@@ -6,7 +6,7 @@ import java.util.*;
  *
  interpolate(points: List[Tuple[int, int]], interval int) -> List[Tuple[int, int]]
 
- input =                  [(0, 100), (5, 110),            (15, 130) p                       (30, 115) n], interval = 5
+ input = [(0, 100), (5, 110),            (15, 130) p                       (30, 115) n], interval = 5
 
  interpolate(input, 5) -> [(0, 100), (5, 110), (10, 120), (15, 130), (20, 125), (25, 120), (30, 115)]
 

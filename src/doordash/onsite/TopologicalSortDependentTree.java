@@ -65,7 +65,6 @@ public class TopologicalSortDependentTree {
         for (String[] i : input) {
             map.putIfAbsent(i[1], new ArrayList<>());
             map.get(i[1]).add(i[0]);
-
             inDegreeMap.put(i[0], inDegreeMap.getOrDefault(i[0], 0) + 1);
         }
 

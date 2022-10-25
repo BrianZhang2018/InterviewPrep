@@ -5,7 +5,6 @@ import java.util.*;
 
 /**
  * the maximum path sum between two asterisk nodes which can on any node
- *
  # Example Tree 2
  #          500*
  #       /        \
@@ -19,38 +18,37 @@ import java.util.*;
  *
  * Created by brianzhang on 11/19/21.
  */
-public class MaximumPathSum2 {
+public class MaximumPathSumBetweenTwoAsteriskNodes {
     public static void main(String[] args) {
-        TreeNode root = new TreeNode(500, true);
-        root.left = new TreeNode(2, true);
+        TreeNode root = new TreeNode(500, false);
+        root.left = new TreeNode(2, false);
         root.right = new TreeNode(80, false);
         root.left.left = new TreeNode(100, true);
-        root.left.right = new TreeNode(50, true);
-        root.right.left = new TreeNode(200, true);
+        root.left.right = new TreeNode(50, false);
+        root.right.left = new TreeNode(200, false);
         root.right.right = new TreeNode(151, false);
-        root.right.right.right = new TreeNode(100, false);
+        root.right.right.right = new TreeNode(100, true);
         dfs(root);
-        System.out.println(maxPath);
+        System.out.println(maxPathSum);
     }
 
-    static int maxPath = Integer.MIN_VALUE;
+    static int maxPathSum = Integer.MIN_VALUE;
     public static SubPathSum dfs(TreeNode root) {
         if(root == null) return null;
         SubPathSum left = dfs(root.left);
         SubPathSum right = dfs(root.right);
         left = left == null? new SubPathSum(0, false) : left;
         right = right == null? new SubPathSum(0, false) : right;
-
         if(root.isAsterisk) {
             if(left.isStartWithAsterisk && right.isStartWithAsterisk) {
-                maxPath = Math.max(root.val + Math.max(left.sum, right.sum), maxPath);
+                maxPathSum = Math.max(root.val + Math.max(left.sum, right.sum), maxPathSum);
             }else if (left.isStartWithAsterisk || right.isStartWithAsterisk){
-                maxPath = Math.max(root.val + (left.isStartWithAsterisk ? left.sum : right.sum), maxPath);
+                maxPathSum = Math.max(root.val + (left.isStartWithAsterisk ? left.sum : right.sum), maxPathSum);
             }
             return new SubPathSum(root.val, true);  // 剪枝 or leaf node
         }else{ // no Asterisk
             if(left.isStartWithAsterisk && right.isStartWithAsterisk){
-                maxPath = Math.max(root.val + left.sum + right.sum, maxPath);
+                maxPathSum = Math.max(root.val + left.sum + right.sum, maxPathSum);
                 return new SubPathSum(root.val + Math.max(left.sum, right.sum), true);
             } else if (left.isStartWithAsterisk || right.isStartWithAsterisk) {
                 return new SubPathSum(root.val + (left.isStartWithAsterisk ? left.sum: right.sum), true); // 记住是自底向上看问题,当递归回到中间的节点which problem already can be solved base on已解决的下层节点

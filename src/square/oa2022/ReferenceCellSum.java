@@ -3,7 +3,6 @@ package square.oa2022;
 import java.util.Arrays;
 
 public class ReferenceCellSum {
-
     public static void main(String[] args) {
         String[][] input = new String[][]{{"1", "A1+1", "A1+2"}}; // A1 means row 0 col 1
         System.out.println(Arrays.deepToString(helper(input)));

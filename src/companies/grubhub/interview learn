@@ -1,0 +1,11 @@
+Time complexity:
+
+https://stackoverflow.com/questions/4547012/complexities-of-binary-tree-traversals/28498337
+
+Recursion and interative has the same big(O) - time complexity, but recursion is more costly for the memory as need store into the stack.
+
+In-order, Pre-order, and Post-order traversals are Depth-First traversals for Binary Tree (it's also a graph)
+O(n), because you traverse each node once. Or rather - the amount of work you do for each node is constant (does not depend on the rest of the nodes).
+
+bigO will be O(n) for unbalanced Binary Tree and O(logn) for balanced BST.
+

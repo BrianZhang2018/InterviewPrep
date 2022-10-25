@@ -1,0 +1,8 @@
+answer key ["A", "B" ....]  List<String>
+
+studentAnswers: [David, ["A", "B" ....]]...   Map<String, List<String>>
+
+1. Find Mean of the scores
+2. Find the Median of the scores
+
+followup: arithmetic exception - edgecase

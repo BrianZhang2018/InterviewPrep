@@ -1,7 +1,6 @@
 package crowdStrike;
 
 public class BalanceBracket {
-
     public static void main(String[] args) {
         System.out.println(balance("<>>>", 2));
         System.out.println(balance("<><<", 2));
