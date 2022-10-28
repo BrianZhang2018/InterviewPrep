@@ -66,12 +66,33 @@ public class FormatOutput {
                 for(String s : text.split(" ")) {
                     list.add(s);
                 }
-                dfs(list);
+                helper(list);
             }
             printSeparateLine(width);
         }
     }
 
+    public static void helper(List<String> list) {
+        String output="";
+        for(int i=0; i<list.size(); i++) {
+            String str = list.get(i);
+            if((output + str).length() <= width) {
+                if((output + str).length() == width) {
+                    output += str;
+                } else {
+                    output += str + " ";
+                }
+            } else {
+                printOutContent(output);
+                output = str + " ";
+            }
+        }
+        if(!output.isEmpty()) {
+            printOutContent(output);
+        }
+    }
+
+/* no need dfs
     public static void dfs(List<String> list) {
         String output="";
         for(int i=0; i<list.size(); i++) {
@@ -92,6 +113,7 @@ public class FormatOutput {
             printOutContent(output);
         }
     }
+*/
 
     public static void printOutContent(String output) {
         System.out.print("|" + output);
