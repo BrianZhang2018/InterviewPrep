@@ -1,5 +1,8 @@
 package confluent;
 
+import java.util.*;
+import java.util.concurrent.*;
+
 /**
  * 1. Windowed Average. you are given a set of key, value pair. Each key, value expires after k millisec.
  * I can ask you to get me a specific key. Also, I can ask you to return me the average.
@@ -9,6 +12,22 @@ package confluent;
  * LRU
  */
 public class WindowedAverage {
+    public static void main(String[] args) {
+        Map<Integer, Integer> map = new HashMap<>();
+        map.size();
+        ConcurrentHashMap<Integer, Integer> cm = new ConcurrentHashMap<>();
 
+        System.out.println( Runtime.getRuntime().availableProcessors());
 
+        Executors.newCachedThreadPool().submit(new Runnable() {
+            @Override
+            public void run() {
+                for(int i=0; i<10; i++) {
+                    System.out.println(Thread.currentThread().getId());
+                    System.out.println("hahah");
+                }
+            }
+        });
+
+    }
 }

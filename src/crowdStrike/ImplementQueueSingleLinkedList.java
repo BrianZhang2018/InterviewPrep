@@ -1,7 +1,6 @@
 package crowdStrike;
 
 public class ImplementQueueSingleLinkedList {
-
     public static void main(String[] args) {
         ImplementQueueSingleLinkedList test = new ImplementQueueSingleLinkedList();
         test.add(1);

@@ -9,27 +9,20 @@ package coinbase;
  * Created by brianzhang on 7/8/20.
  */
 public class DesignTicTacToe {
-
     private int[] rows;
     private int[] cols;
     private int diagonal;
     private int antiDiagonal;
-    private int size;
 
-    /**
-     * Initialize your data structure here.
-     */
     public DesignTicTacToe(int n) {
         rows = new int[n];
         cols = new int[n];
         diagonal = 0;
         antiDiagonal = 0;
-        size = n;
     }
 
     /**
      * Player {player} makes a move at ({row}, {col}).
-     *
      * @param row    The row of the board.
      * @param col    The column of the board.
      * @param player The player, can be either 1 or 2.
@@ -39,18 +32,18 @@ public class DesignTicTacToe {
      * 2: Player 2 wins.
      */
     public int move(int row, int col, int player) {
-        int v = player == 1 ? 1 : -1;
-        rows[row] += v;
-        cols[col] += v;
+        int currPlayer = player == 1 ? 1 : -1;
+        rows[row] += currPlayer;
+        cols[col] += currPlayer;
 
-        if (row == col) {
-            diagonal += v;
-        }
-        if (row == size - col - 1) {
-            antiDiagonal += v;
-        }
-        if (Math.abs(rows[row]) == size || Math.abs(cols[col]) == size
-                || Math.abs(diagonal) == size || Math.abs(antiDiagonal) == size) {
+        if (row == col) diagonal += currPlayer;
+        if (row == cols.length - col - 1)  antiDiagonal += currPlayer;
+
+        int n = cols.length;
+        if (Math.abs(rows[row]) == n ||
+                Math.abs(cols[col]) == n ||
+                Math.abs(diagonal) == n ||
+                Math.abs(antiDiagonal) == n) {
             return player;
         }
         return 0;
