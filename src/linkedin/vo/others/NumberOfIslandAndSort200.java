@@ -1,6 +1,6 @@
 package linkedin.vo.others;
 
-import javafx.util.Pair;
+import category.model.Pair;
 import java.util.*;
 
 /**

@@ -1,6 +1,6 @@
 package linkedin.phoneScreening;
 
-import javafx.util.Pair;
+import category.model.Pair;
 import java.util.concurrent.PriorityBlockingQueue;
 
 /**

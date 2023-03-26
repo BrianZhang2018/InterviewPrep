@@ -1,6 +1,6 @@
 package coinbase;
 
-import javafx.util.Pair;
+import category.model.Pair;
 
 import java.sql.Timestamp;
 import java.util.Calendar;

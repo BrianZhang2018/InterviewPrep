@@ -1,6 +1,6 @@
 package square.onsite;
 
-import javafx.util.Pair;
+import category.model.Pair;
 import java.util.*;
 
 /**

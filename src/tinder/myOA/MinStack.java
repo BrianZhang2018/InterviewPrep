@@ -1,6 +1,6 @@
 package tinder.myOA;
 
-import javafx.util.Pair;
+import category.model.Pair;
 import java.util.ArrayDeque;
 import java.util.Deque;
 

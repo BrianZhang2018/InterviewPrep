@@ -1,6 +1,6 @@
 package bloomberg;
 
-import javafx.util.Pair;
+import category.model.Pair;
 import java.util.*;
 
 /**
